@@ -53,7 +53,7 @@ namespace eticarethaftasonu.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
+            ViewBag.kateliste = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             return View();
         }
 
@@ -70,14 +70,14 @@ namespace eticarethaftasonu.Controllers
                 //bocek.png  .png domates.jpg  .jpg
                 string yeniisim = Guid.NewGuid().ToString() + uzanti;
 
-                string yol = Path.Combine(Directory.GetCurrentDirectory() + "wwwroot/Urunler/" + yeniisim);
+                string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/Urunler/" + yeniisim);
                 using (var stream = new FileStream(yol,FileMode.Create))
                 {
                     ResimYukle.CopyToAsync(stream);
                 }
                 products.ProuctPicture = yeniisim;
             }
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(products);
                 await _context.SaveChangesAsync();
@@ -102,6 +102,7 @@ namespace eticarethaftasonu.Controllers
             {
                 return NotFound();
             }
+            //ViewBag.kateliste = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", products.CategoryId);
             return View(products);
         }
@@ -111,14 +112,30 @@ namespace eticarethaftasonu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ProductCode,ProductDescription,ProuctPicture,CategoryId")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ProductCode,ProductDescription,ProuctPicture,CategoryId")] Products products, IFormFile ResimYukle)
         {
+
+            if (ResimYukle != null)
+            {
+                var uzanti = Path.GetExtension(ResimYukle.FileName);
+                //bocek.png  .png domates.jpg  .jpg
+                string yeniisim = Guid.NewGuid().ToString() + uzanti;
+
+                string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/Urunler/" + yeniisim);
+                using (var stream = new FileStream(yol, FileMode.Create))
+                {
+                    ResimYukle.CopyToAsync(stream);
+                }
+                products.ProuctPicture = yeniisim;
+            }
+
+
             if (id != products.ProductId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

@@ -10,6 +10,6 @@ namespace eticarethaftasonu.Data
             
         }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<eticarethaftasonu.Models.Products>? Products { get; set; }
+        public DbSet<Products> Products { get; set; }
     }
 }
