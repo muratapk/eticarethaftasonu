@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
@@ -31,8 +31,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProuctPicture" class="control-label"></label>
-                <input asp-for="ProuctPicture" class="form-control" />
-                <span asp-validation-for="ProuctPicture" class="text-danger"></span>
+                <input type="file" asp-for="ResimYukle" class="form-control" />
+                <span asp-validation-for="ResimYukle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eticarethaftasonu.Models
 {
@@ -6,7 +7,9 @@ namespace eticarethaftasonu.Models
     {
         [Key]
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+		[Required(ErrorMessage = "Boş Bırakmazsınız")]
+		[DisplayName("Kategori Adı")]
+		public string CategoryName { get; set; }
         virtual public List<Products> Products { get; set; }
         //kateogir birden fazla ürün bilgiisi taşınambilir
         //

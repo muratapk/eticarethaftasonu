@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eticarethaftasonu.Data;
 using eticarethaftasonu.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace eticarethaftasonu.Controllers
 {
@@ -61,8 +62,21 @@ namespace eticarethaftasonu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ProductCode,ProductDescription,ProuctPicture,CategoryId")] Products products)
+        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ProductCode,ProductDescription,ProuctPicture,CategoryId")] Products products,IFormFile ResimYukle)
         {
+            if (ResimYukle != null)
+            {
+                var uzanti = Path.GetExtension(ResimYukle.FileName);
+                //bocek.png  .png domates.jpg  .jpg
+                string yeniisim = Guid.NewGuid().ToString() + uzanti;
+
+                string yol = Path.Combine(Directory.GetCurrentDirectory() + "wwwroot/Urunler/" + yeniisim);
+                using (var stream = new FileStream(yol,FileMode.Create))
+                {
+                    ResimYukle.CopyToAsync(stream);
+                }
+                products.ProuctPicture = yeniisim;
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(products);
