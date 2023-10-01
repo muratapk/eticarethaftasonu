@@ -77,7 +77,7 @@ namespace eticarethaftasonu.Controllers
                 }
                 products.ProuctPicture = yeniisim;
             }
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(products);
                 await _context.SaveChangesAsync();
@@ -135,7 +135,7 @@ namespace eticarethaftasonu.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {

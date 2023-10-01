@@ -1,21 +1,30 @@
-﻿using eticarethaftasonu.Models;
+﻿using eticarethaftasonu.Data;
+using eticarethaftasonu.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace eticarethaftasonu.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Urunler()
+        {
+            var liste=_context.Products.Include(p=>p.Category).ToList();
+            return View(liste);
         }
 
         public IActionResult Privacy()
