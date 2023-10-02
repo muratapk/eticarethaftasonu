@@ -3,14 +3,23 @@
         ViewData["Title"] = "Urunler";
         Layout = "~/Views/Shared/_HomeLayout.cshtml";
     }
-@await Component.InvokeAsync("SliderList")
+    @await Component.InvokeAsync("SliderList")
     <div class="container py-5">
         <div class="row">
             <!--Kategoriler-->
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Kategoriler</h1>
                 <ul class="list-unstyled templatemo-accordion">
-                   <Partial name="_categoryPartial"/>
+                    @foreach(var k in ViewBag.categoriler)
+                    {
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="/Home/Kategoriler/@k.CategoryId">
+                            @k.CategoryName
+                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                       
+                    </li>
+                    }
                     
                    
                 </ul>

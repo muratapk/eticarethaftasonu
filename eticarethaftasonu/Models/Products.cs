@@ -26,6 +26,6 @@ namespace eticarethaftasonu.Models
 		public int? CategoryId { get; set; }
 		virtual public Category? Category { get; set; }
 		[NotMapped]
-		public IFormFile ResimYukle { get; set; }
+		public IFormFile? ResimYukle { get; set; }
 	}
 }

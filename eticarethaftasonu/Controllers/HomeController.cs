@@ -23,10 +23,25 @@ namespace eticarethaftasonu.Controllers
 
         public IActionResult Urunler()
         {
+            List<Category>kategoriler=_context.Categories.ToList();
+            ViewBag.categoriler = kategoriler;
             var liste=_context.Products.Include(p=>p.Category).ToList();
             return View(liste);
         }
-
+        [HttpGet]
+        public IActionResult Detay(int? id)
+        {
+            var bul = _context.Products.Include(p => p.Category).FirstOrDefault();
+            return View(bul);
+        }
+        [HttpGet]
+        public IActionResult Kategoriler(int? id)
+        {
+            List<Category> kategoriler = _context.Categories.ToList();
+            ViewBag.categoriler = kategoriler;
+            var secim=_context.Products.Include(p=>p.Category).Where(x=>x.CategoryId == id).ToList();
+            return View(secim);
+        }
         public IActionResult Privacy()
         {
             return View();

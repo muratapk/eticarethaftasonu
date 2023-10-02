@@ -68,7 +68,7 @@
                             <a class="nav-link" href="about.html">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
+                            <a class="nav-link" href="/Home/Urunler">Ürünler</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
@@ -117,6 +117,7 @@
             </form>
         </div>
     </div>
+    @await Component.InvokeAsync("SliderList")
 
     @RenderBody()
     <!-- Start Footer -->
