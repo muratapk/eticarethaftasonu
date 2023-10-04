@@ -15,7 +15,7 @@ namespace eticarethaftasonu.Component
 
         public IViewComponentResult Invoke()
         {
-            IEnumerable<Slider> sliderlist = _context.Sliders;
+            IEnumerable<Slider> sliderlist = _context.Sliders.ToList();
             return View(sliderlist);
         }
     }
