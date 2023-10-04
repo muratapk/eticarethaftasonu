@@ -1,6 +1,7 @@
 ﻿using eticarethaftasonu.Data;
 using eticarethaftasonu.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eticarethaftasonu.Component
 {
