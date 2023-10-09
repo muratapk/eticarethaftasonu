@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using eticarethaftasonu.Data;
 using eticarethaftasonu.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eticarethaftasonu.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;

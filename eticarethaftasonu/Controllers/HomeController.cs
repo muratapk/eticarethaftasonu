@@ -46,6 +46,10 @@ namespace eticarethaftasonu.Controllers
         {
             return View();
         }
+        public IActionResult PageNot()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

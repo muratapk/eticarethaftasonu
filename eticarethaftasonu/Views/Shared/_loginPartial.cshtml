@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if(SignInManager.IsSignedIn(User))
+{
+   
+    <li class="nav-item">
+        <a class="nav-link" href="/MyAccount/Index">@User.Identity.Name</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Logout/Index">Çıkış</a>
+    </li>
+
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" href="/Register/Index">Kayıt Ol</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Login/Index">Üye Giriş</a>
+    </li>
+}
+
+
+

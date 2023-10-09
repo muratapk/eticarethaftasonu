@@ -1,9 +1,11 @@
 ﻿using eticarethaftasonu.Data;
 using eticarethaftasonu.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eticarethaftasonu.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
