@@ -22,8 +22,11 @@ namespace eticarethaftasonu.Models
 		public string? ProductDescription { get; set; }
 		
 		public string? ProuctPicture { get; set; }
-		[DisplayName("Ürün Kategorisi")]
-		public int? CategoryId { get; set; }
+		
+        [DisplayName("Ürün Fiyatı")]
+        public decimal ProductPrice { get; set; }
+        [DisplayName("Ürün Kategorisi")]
+        public int? CategoryId { get; set; }
 		virtual public Category? Category { get; set; }
 		[NotMapped]
 		public IFormFile? ResimYukle { get; set; }
