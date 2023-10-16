@@ -30,12 +30,12 @@ namespace eticarethaftasonu.Controllers
 
             return View(cartVm);
         }
-        public async Task<IActionResult> Add(long id)
+        public async Task<IActionResult> Add(int id)
         {
             Products product= await _context.Products.FindAsync(id);
 
-            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
-            CartItem cartItem=cart.Where(c=>c.ProductId == id).FirstOrDefault();
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            CartItem cartItem=cart.FirstOrDefault(c =>c.ProductId == id);
             if(cartItem==null)
             {
                 cart.Add(new CartItem(product));
@@ -46,9 +46,9 @@ namespace eticarethaftasonu.Controllers
             }
             HttpContext.Session.SetJson("Cart", cart);
             TempData["Mesaj"] = "Ürün Sepette Eklendi";
-            return View();
+            return Redirect(Request.Headers["Referer"].ToString());
         }
-        public async Task<IActionResult> Decrease(long id)
+        public async Task<IActionResult> Decrease(int id)
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
             CartItem cartItem = cart.Where(c => c.ProductId == id).FirstOrDefault();
@@ -71,7 +71,7 @@ namespace eticarethaftasonu.Controllers
             TempData["Mesaj"] = "Ürün Sepetten Silindi";
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Remove(long id)
+        public async Task<IActionResult> Remove(int id)
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
             cart.RemoveAll(p => p.ProductId == id);

@@ -1,6 +1,7 @@
 ﻿using eticarethaftasonu.Data;
 using eticarethaftasonu.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eticarethaftasonu.Component
 {
@@ -11,10 +12,10 @@ namespace eticarethaftasonu.Component
         {
              _context= context;
         }
-        public IViewComponentResult Invoke()
+        public  IViewComponentResult Invoke()
         {
-            var liste=_context.Sliders.OrderByDescending(s=>s.SliderId).FirstOrDefault();
+            var liste = _context.Sliders.OrderByDescending(s => s.SliderId).FirstOrDefault();
             return View(liste);
-        }
+		}
     }
 }
